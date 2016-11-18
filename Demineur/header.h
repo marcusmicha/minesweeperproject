@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <curses.h>
 #include "time.h"
 
 #define COL_MIN 5
@@ -27,6 +28,9 @@ typedef struct parametres{
     int nombre_colonnes;
     int nombre_mines;
 }param;
+
+/// ClearBuffer
+void clearBuffer();
 
 /// Initialisation d'une case
 void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouverte);

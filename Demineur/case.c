@@ -1,4 +1,12 @@
 #include "header.h"
+/// Clear Buffer
+void clearBuffer(){
+    int c = 0;
+    while (c != '\n' && c != EOF)
+    {
+        c = getchar();
+    }
+}
 
 /// Initialisation d'une case
 void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouverte){
@@ -60,7 +68,8 @@ void affichTabData(t_case** tab, int n_ligne, int n_col){
 param* menu(param* param_partie){
 
     /// On initialise les variables nécessaires
-    int choix, ok=0, mines_min, mines_max;
+    int ok=0, mines_min, mines_max;
+    char choix;
 
     /// On initialise les valeurs à -1 pour les conditions de parties personnalisées
     param_partie->nombre_mines=-1;
@@ -81,12 +90,14 @@ param* menu(param* param_partie){
     printf("\nVotre choix : ");
 
     do {
-        scanf("%d", &choix);
+        
+        choix = getchar();
+        clearBuffer();
 
         switch (choix)
         {
             /// Cas 1 : partie facile : 10x10 et 15 mines
-            case 1 :
+            case '1' :
                 param_partie->nombre_colonnes=10;
                 param_partie->nombre_lignes=10;
                 param_partie->nombre_mines=15;
@@ -94,7 +105,7 @@ param* menu(param* param_partie){
                 break;
 
             /// Cas 2 : partie moyenne : 15x15 et 45 mines
-            case 2 :
+            case '2' :
                 param_partie->nombre_colonnes=15;
                 param_partie->nombre_lignes=15;
                 param_partie->nombre_mines=45;
@@ -102,7 +113,7 @@ param* menu(param* param_partie){
                 break;
 
             /// Cas 3 : partie difficile : 20x20 et 80 mines
-            case 3 :
+            case '3' :
                 param_partie->nombre_colonnes=15;
                 param_partie->nombre_lignes=15;
                 param_partie->nombre_mines=80;
@@ -110,7 +121,7 @@ param* menu(param* param_partie){
                 break;
 
             /// Cas 4 : partie personnalisée
-            case 4 :
+            case '4' :
 
                 /// L'utilisateur rentre le nombre de colonnes souhaitées
                 printf("\nVeuillez rentrer le nombre de colonnes (min %d et max %d) : ", COL_MIN, COL_MAX);
