@@ -174,17 +174,52 @@ param* menu(param* param_partie){
 }
 
 /// Affichage matrice de jeu
-void affichTab(param* p){
+void affichTab(t_case** tab, param* p){
     int i, j;
     for(i = 0; i< p->nombre_lignes; i++){
         for(j = 0; j< p->nombre_colonnes; j++)
-            printf("X");
+            if(tab[i][j].ouverte == 0){
+                if(tab[i][j].flag == 1)
+                    printf("F");
+                else
+                    printf("X");
+            }
+            else{
+                if (tab[i][j].mine == 9)
+                    printf("M");
+                if (tab[i][j].mine >= 1 && tab[i][j].mine <=8)
+                    printf("%d", tab[i][j].mine);
+                if (tab[i][j].mine == 0)
+                    printf(" ");
+            }
         printf("\n");
     }
         
 }
 
+/// Affichage matrice de jeuBETA
+void affichTabBETA(t_case** tab, param* p){
+    int i, j;
+    for(i = 0; i< p->nombre_lignes; i++){
+        for(j = 0; j< p->nombre_colonnes; j++)
+                if (tab[i][j].mine == 9)
+                    printf("M");
+                if (tab[i][j].mine >= 1 && tab[i][j].mine <=8)
+                    printf("%d", tab[i][j].mine);
+                if (tab[i][j].mine == 0)
+                    printf(" ");
+            }
+        printf("\n");
+    }
 
+/// GOTOLIGCOL
+void gotoligcol(int x,int y)
+
+{
+    
+    printf("\033[%d;%dH", (x), (y)) ;
+    
+}
 
 
 

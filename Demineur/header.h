@@ -50,8 +50,13 @@ void affichTabData(t_case** tab, int n_ligne, int n_col);
 /// Initialisation des paramètres du menu
 param* menu(param* param_partie);
 
-/// Affichage matrice de jeu
-void affichTab(param* p);
+/// Affichage matrice de jeuBETA
+void affichTab(t_case** tab, param* p);
 
+/// Affichage matrice de jeuBETA
+void affichTabBETA(t_case** tab, param* p);
+
+///GOTOLIGCOL
+void gotoligcol(int x,int y);
 
 #endif // HEADER_H_INCLUDED

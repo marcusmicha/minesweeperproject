@@ -36,11 +36,12 @@ int main()
     initTab(tab, n_ligne, n_col);
     
     /// Affichage matrice de jeu
-    affichTab(param_partie);
+    affichTab(tab, param_partie);
+    
     
     //affichTabData(tab, n_ligne, n_col);
 
-    /// Libération de la mémoire allouée dynamiquement
+    /// LibŽration de la mémoire allouée dynamiquement
 
     free(tab);
     free(param_partie);
