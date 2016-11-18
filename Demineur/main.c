@@ -21,7 +21,7 @@ int main()
     n_col = param_partie->nombre_colonnes;
     n_mines = param_partie->nombre_mines;
 
-    /// Affichage des paramètres de la partie
+    /// Affichage des paramtres de la partie
 
     printf ("\n\nParametres de la partie :\nColonnes : %d\nLignes : %d\nMines : %d\n\n", param_partie->nombre_colonnes, param_partie->nombre_lignes, param_partie->nombre_mines);
 
@@ -30,10 +30,14 @@ int main()
     initCase(&new_case, 0, 0, 0, n_rand, 0); // Initialisation de la case à la position (0,0)
     affichCase(&new_case);
 
-    /// Creation de la matrice
+    /// Creation de la matrice de jeu
 
     tab = creerTab(n_ligne, n_col);
     initTab(tab, n_ligne, n_col);
+    
+    /// Affichage matrice de jeu
+    affichTab(param_partie);
+    
     //affichTabData(tab, n_ligne, n_col);
 
     /// Libération de la mémoire allouée dynamiquement

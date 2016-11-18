@@ -17,7 +17,7 @@ void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouv
     pt_case->ouverte = ouverte;
 }
 
-/// Allocation dynamique de la mÈmoire pour le tableau
+/// Allocation dynamique de la mémoire pour le tableau
 t_case** creerTab(int n_ligne, int n_col){
     int i=0;
     t_case** tab;
@@ -43,7 +43,7 @@ void initTab(t_case** tab, int n_ligne, int n_col){
     }
 }
 
-/// Affichage des donnÈes d'une case
+/// Affichage des données d'une case
 void affichCase(t_case* pt_case){
     printf("x = %d\n",pt_case->pos_x);
     printf("y = %d\n",pt_case->pos_y);
@@ -53,7 +53,7 @@ void affichCase(t_case* pt_case){
     else printf("Mine sur la case !\n"); // si nombre = 9 : mine sur la case
 }
 
-/// Affichage des donnÈes du tableau
+/// Affichage des données du tableau
 void affichTabData(t_case** tab, int n_ligne, int n_col){
     int i,j;
     printf("\n\nLe tableaux est :\n");
@@ -65,6 +65,7 @@ void affichTabData(t_case** tab, int n_ligne, int n_col){
     }
 }
 
+/// Initialisation des paramètres du menu
 param* menu(param* param_partie){
 
     /// On initialise les variables nÈcessaires
@@ -171,3 +172,26 @@ param* menu(param* param_partie){
     return param_partie;
 
 }
+
+/// Affichage matrice de jeu
+void affichTab(param* p){
+    int i, j;
+    for(i = 0; i< p->nombre_lignes; i++){
+        for(j = 0; j< p->nombre_colonnes; j++)
+            printf("X");
+        printf("\n");
+    }
+        
+}
+
+
+
+
+
+
+
+
+
+
+
+

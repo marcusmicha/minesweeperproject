@@ -47,7 +47,11 @@ void affichCase(t_case *pt_case);
 /// Affichage des donnÈes d'un tableau
 void affichTabData(t_case** tab, int n_ligne, int n_col);
 
+/// Initialisation des paramètres du menu
 param* menu(param* param_partie);
+
+/// Affichage matrice de jeu
+void affichTab(param* p);
 
 
 #endif // HEADER_H_INCLUDED
