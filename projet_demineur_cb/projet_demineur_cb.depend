@@ -1,12 +1,14 @@
 # depslib dependency file v1.0
-1479552821 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\case.c
+1479564426 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\case.c
 	"header.h"
 
-1479552821 d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\header.h
+1479564060 d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\header.h
 	<stdio.h>
 	<stdlib.h>
+	<windows.h>
+	<conio.h>
 	"time.h"
 
-1479552821 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\main.c
+1479564137 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\main.c
 	"header.h"
 

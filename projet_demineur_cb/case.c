@@ -74,7 +74,7 @@ void affichTabData(t_case** tab, int n_ligne, int n_col){
     }
 }
 
-int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col) {
+int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col, int *nb_a_decouvrir) {
     int n_mines_autour = 0;
 
     /// Si la case est en dehors du tableau (i/j < 0, i>=nb_ligne, j>=nb_colonnes) alors on ne fait rien
@@ -148,16 +148,17 @@ int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col) {
         /// Si la case ne possède aucune mine autour d'elle, alors on ouvre les 8 cases autour d'elle
         if (tab[i][j].mine==0)
         {
-            decouvreCase(tab,i-1,j-1,n_ligne,n_col);
-            decouvreCase(tab,i-1,j,n_ligne,n_col);
-            decouvreCase(tab,i-1,j+1,n_ligne,n_col);
-            decouvreCase(tab,i,j+1,n_ligne,n_col);
-            decouvreCase(tab,i+1,j+1,n_ligne,n_col);
-            decouvreCase(tab,i+1,j,n_ligne,n_col);
-            decouvreCase(tab,i+1,j-1,n_ligne,n_col);
-            decouvreCase(tab,i,j-1,n_ligne,n_col);
+            decouvreCase(tab,i-1,j-1,n_ligne,n_col, nb_a_decouvrir);
+            decouvreCase(tab,i-1,j,n_ligne,n_col, nb_a_decouvrir);
+            decouvreCase(tab,i-1,j+1,n_ligne,n_col, nb_a_decouvrir);
+            decouvreCase(tab,i,j+1,n_ligne,n_col, nb_a_decouvrir);
+            decouvreCase(tab,i+1,j+1,n_ligne,n_col, nb_a_decouvrir);
+            decouvreCase(tab,i+1,j,n_ligne,n_col, nb_a_decouvrir);
+            decouvreCase(tab,i+1,j-1,n_ligne,n_col, nb_a_decouvrir);
+            decouvreCase(tab,i,j-1,n_ligne,n_col, nb_a_decouvrir);
         }
     }
+    (*nb_a_decouvrir)--;
     return 2;
 }
 
@@ -332,7 +333,7 @@ void gotoligcol(int lig,int col)
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), coord_xy );
 }
 
-int actionClavier(t_case** tab, int *i, int *j, int* flagcount, param* param_partie){
+int actionClavier(t_case** tab, int *i, int *j, int* flagcount, param* param_partie, int* nb_a_decouvrir, int* perdu){
     char key = 'u';
     int quitter = 0;
 
@@ -346,45 +347,67 @@ int actionClavier(t_case** tab, int *i, int *j, int* flagcount, param* param_par
                 if(*i>0)
                 {
                     (*i)--;
-                    gotoligcol(*i, *j);
+                    gotoligcol(*j, *i);
                 }
                 break;
-            case '2' :
+            case '5' :
                 if(*i<(param_partie->nombre_lignes - 1))
                 {
                     (*i)++;
-                    gotoligcol(*i, *j);
+                    gotoligcol(*j, *i);
                 }
                 break;
             case '4' :
                 if(*j>0)
                 {
                     (*j)--;
-                    gotoligcol(*i, *j);
+                    gotoligcol(*j, *i);
                 }
                 break;
             case '6' :
                 if(*j<(param_partie->nombre_colonnes - 1))
                 {
                     (*j)++;
-                    gotoligcol(*i, *j);
+                    gotoligcol(*j, *i);
                 }
                 break;
             case ' ' :
-                modifFlag(tab, *i, *j, flagcount);
+                modifFlag(tab, *i, *j, flagcount, param_partie);
                 initAffich(tab, param_partie, *flagcount);
-                gotoligcol(*i, *j);
+                gotoligcol(*j, *i);
                 break;
             case '\r' :
-                decouvreCase(tab, *i, *j, param_partie->nombre_lignes, param_partie->nombre_colonnes);
+                *perdu = decouvreCase(tab, *i, *j, param_partie->nombre_lignes, param_partie->nombre_colonnes, nb_a_decouvrir);
                 initAffich(tab, param_partie, *flagcount);
-                gotoligcol(*i, *j);
+                gotoligcol(*j, *i);
                 break;
             case 'q' :
                 quitter = 1;
         }
     }
     return quitter;
+}
+
+/// Gestion des drapeaux
+void countFlag(param* p, int flagcount){
+	int nbflagrestant;
+	nbflagrestant = p->nombre_mines - flagcount;
+	printf("Il vous reste %d flags\n", nbflagrestant);
+}
+
+
+void modifFlag(t_case** tab, int x, int y, int *flagcount, param* p){
+	int nb_flag_restants = p->nombre_mines - (*flagcount);
+	if((tab[x][y].ouverte !=1)&&((nb_flag_restants)>0)){
+    	if(tab[x][y].flag == 1){
+        	tab[x][y].flag = 0;
+            (*flagcount)--;
+    	}
+    	else {
+        	tab[x][y].flag = 1;
+            (*flagcount)++;
+    	}
+	}
 }
 
 void initAffich(t_case** tab, param* param_partie, int flagcount)
@@ -394,4 +417,40 @@ void initAffich(t_case** tab, param* param_partie, int flagcount)
     affichTab(tab, param_partie);
     gotoligcol(param_partie->nombre_colonnes + 8,5);
     countFlag(param_partie, flagcount);
+    gotoligcol(0, param_partie->nombre_lignes + 2);
+}
+
+
+void boucleJeu(t_case** tab, int* flagcount, param* param_partie)
+{
+    int quitter = 0, perdu = 0, gagne = 0;
+    int calc = ((param_partie->nombre_colonnes)*(param_partie->nombre_lignes)) - param_partie->nombre_mines;
+    int x = (int) param_partie->nombre_lignes / 2;
+    int y = (int) param_partie->nombre_colonnes / 2;
+
+
+    int *nb_a_decouvrir;
+    int* i;
+    int* j;
+
+    nb_a_decouvrir = &calc;
+    i=&x;
+    j=&y;
+
+    gotoligcol(y,x);
+
+    while ((quitter != 1) && (perdu != 1) && (gagne != 1))
+    {
+        quitter = actionClavier(tab, i, j, flagcount, param_partie, nb_a_decouvrir, &perdu);
+        if((*nb_a_decouvrir)==0) gagne = 1;
+    }
+
+    gotoligcol(0, param_partie->nombre_lignes + 2);
+    if(quitter == 1)
+        printf("A bientot !\n");
+    else if (perdu == 1)
+        printf("Perdu !! ");
+    else if (gagne == 1)
+        printf("Bien Joue !!");
+
 }

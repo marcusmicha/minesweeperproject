@@ -7,6 +7,7 @@ int main()
     //t_case new_case;
     t_case** tab;
     int n_ligne, n_col, n_mines;
+    //int quitter=0;
     param* param_partie = (param*) malloc(sizeof(param));
 
     /// Initialisation
@@ -35,13 +36,17 @@ int main()
     tab = creerTab(n_ligne, n_col);
     initTab(tab, n_ligne, n_col, n_mines);
     //affichTabData(tab, n_ligne, n_col);
-    affichTabBETA(tab, param_partie);
-    printf("\n");
-    decouvreCase(tab, 5, 5, param_partie->nombre_lignes, param_partie->nombre_colonnes);
+    //affichTabBETA(tab, param_partie);
+    //printf("\n");
+    //decouvreCase(tab, 5, 5, param_partie->nombre_lignes, param_partie->nombre_colonnes);
 
     ///On clear l'écran à l'aide de la fonction 'system("cls")'
-    system("cls");
-    affichTab(tab, param_partie);
+    int flagcount = 0;
+    //int i=5, j=5;
+    initAffich(tab, param_partie, flagcount);
+
+    boucleJeu(tab, &flagcount, param_partie);
+
 
     /// Libération de la mémoire allouée dynamiquement
 
