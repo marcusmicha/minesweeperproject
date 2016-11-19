@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A036AE6091A67DB7467DD7E3B44E7CA3CC16CD3B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5EFCD25C8CA8B97197C7FB830F583C1589AE4D04" : 9223372036854775807,
+    "A036AE6091A67DB7467DD7E3B44E7CA3CC16CD3B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6AA70924-E833-46DE-A87C-FED96F12460B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5EFCD25C8CA8B97197C7FB830F583C1589AE4D04" : "..\/Desktop\/projet_demineur",
+    "A036AE6091A67DB7467DD7E3B44E7CA3CC16CD3B" : "Demineur\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Demineur",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Demineur.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/marcusmicha\/minesweeperproject\/tree\/master\/Demineur",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5EFCD25C8CA8B97197C7FB830F583C1589AE4D04"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/marcusmicha\/minesweeperproject.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A036AE6091A67DB7467DD7E3B44E7CA3CC16CD3B"
+    }
+  ]
+}

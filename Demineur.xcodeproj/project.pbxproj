@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D914D591DDEE3BC000F2B8F /* case.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D914D561DDEE3BC000F2B8F /* case.c */; };
-		2D914D5A1DDEE3BC000F2B8F /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D914D581DDEE3BC000F2B8F /* main.c */; };
+		2D2220FF1DE05557009C5F2B /* case.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D2220FC1DE05557009C5F2B /* case.c */; };
+		2D2221001DE05557009C5F2B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D2220FE1DE05557009C5F2B /* main.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,9 +25,9 @@
 
 /* Begin PBXFileReference section */
 		2D14D2161DDCD3B1000ADD64 /* Demineur */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Demineur; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D914D561DDEE3BC000F2B8F /* case.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = case.c; sourceTree = "<group>"; };
-		2D914D571DDEE3BC000F2B8F /* header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
-		2D914D581DDEE3BC000F2B8F /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		2D2220FC1DE05557009C5F2B /* case.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = case.c; path = ../../../Desktop/projet_demineur/case.c; sourceTree = "<group>"; };
+		2D2220FD1DE05557009C5F2B /* header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = header.h; path = ../../../Desktop/projet_demineur/header.h; sourceTree = "<group>"; };
+		2D2220FE1DE05557009C5F2B /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../../Desktop/projet_demineur/main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +60,9 @@
 		2D14D2181DDCD3B1000ADD64 /* Demineur */ = {
 			isa = PBXGroup;
 			children = (
-				2D914D561DDEE3BC000F2B8F /* case.c */,
-				2D914D571DDEE3BC000F2B8F /* header.h */,
-				2D914D581DDEE3BC000F2B8F /* main.c */,
+				2D2220FC1DE05557009C5F2B /* case.c */,
+				2D2220FD1DE05557009C5F2B /* header.h */,
+				2D2220FE1DE05557009C5F2B /* main.c */,
 			);
 			path = Demineur;
 			sourceTree = "<group>";
@@ -124,8 +124,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D914D5A1DDEE3BC000F2B8F /* main.c in Sources */,
-				2D914D591DDEE3BC000F2B8F /* case.c in Sources */,
+				2D2221001DE05557009C5F2B /* main.c in Sources */,
+				2D2220FF1DE05557009C5F2B /* case.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
