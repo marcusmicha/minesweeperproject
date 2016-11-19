@@ -77,6 +77,10 @@ void affichTabData(t_case** tab, int n_ligne, int n_col){
 int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col) {
     int n_mines_autour = 0;
 
+    /// Si la case est en dehors du tableau (i/j < 0, i>=nb_ligne, j>=nb_colonnes) alors on ne fait rien
+    if ((i<0) || (j<0) || (i>=n_ligne) || (j>=n_col))
+        return 0;
+
     /// Si la case est deja ouverte on ne fait rien
     if (tab[i][j].ouverte==1)
         return 0;
@@ -92,15 +96,15 @@ int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col) {
         {
             if (i!=0) // Si on est sur la ligne tout en haut, on ne prend pas en compte les cases d'au dessus, donc si i!=0, on les prend en compte
             {
-                /// Si on est pas sur la ligne du haut
+                /// Si on est pas sur la ligne du haut on regarde si il y a une mine au dessus
                 if (tab[i-1][j].mine==9) n_mines_autour++; // si il y a une mine dans la case au dessus, on incrémente n_mines_autour
 
-                /// Si on est pas dans le coin en haut a gauche
+                /// Si on est pas dans le coin en haut a gauche on regarde si il y a une mine au dessus à gauche
                 if (j!=0)
                 {
                     if (tab[i-1][j-1].mine==9) n_mines_autour++;
                 }
-                /// Si on est pas dans le coin en haut a droite
+                /// Si on est pas dans le coin en haut a droite on regarde si il y a une mine au dessus à droite
                 if  (j!=(n_col-1))
                 {
                     if (tab[i-1][j+1].mine==9) n_mines_autour++;
@@ -109,28 +113,28 @@ int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col) {
 
             if (i!=(n_ligne-1))
             {
-                /// Si on est pas sur la ligne du bas
+                /// Si on est pas sur la ligne du bas on regarde si il y a une mine en dessous
                 if (tab[i+1][j].mine==9) n_mines_autour++;
 
-                /// Si on est pas dans le coin en bas a gauche
+                /// Si on est pas dans le coin en bas a gauche on regarde si il y a une mine en dessous a gauche
                 if (j!=0)
                 {
                     if (tab[i+1][j-1].mine==9) n_mines_autour++;
                 }
-                /// Si on est pas dans le coin en bas a droite
+                /// Si on est pas dans le coin en bas a droite on regarde si il y a une mine en dessous à droite
                 if  (j!=(n_col-1))
                 {
                     if (tab[i+1][j+1].mine==9) n_mines_autour++;
                 }
             }
 
-            /// Si on est pas sur la colonne de gauche
+            /// Si on est pas sur la colonne de gauche on regarde si il y a une mine a gauche
             if (j!=0)
             {
                 if (tab[i][j-1].mine==9) n_mines_autour++;
             }
 
-            /// Si on est pas sur la colonne de droite
+            /// Si on est pas sur la colonne de droite on regarde si il y a une mine a droite
             if (j!=(n_col-1))
             {
                 if (tab[i][j+1].mine==9) n_mines_autour++;
@@ -153,9 +157,7 @@ int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col) {
             decouvreCase(tab,i+1,j-1,n_ligne,n_col);
             decouvreCase(tab,i,j-1,n_ligne,n_col);
         }
-
     }
-
     return 2;
 }
 
