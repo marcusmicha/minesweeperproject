@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "time.h"
 
 #define COL_MIN 5
@@ -28,6 +29,7 @@ typedef struct parametres{
     int nombre_mines;
 }param;
 
+/// Initialisation de la partie
 /// Initialisation d'une case
 void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouverte);
 
@@ -37,31 +39,39 @@ t_case** creerTab(int n_ligne, int n_col);
 /// Initialisation d'un tableau
 void initTab(t_case** tab, int n_ligne, int n_col, int mines);
 
+/// Affichage du menu et retour des paramètres de la partie
+void menu(param* param_partie);
+
+
+
+/// Fonctions de Test
 /// Affichage des données d'une case
 void affichCase(t_case *pt_case);
 
 /// Affichage des données d'un tableau
 void affichTabData(t_case** tab, int n_ligne, int n_col);
 
-/// Affichage du menu et retour des paramètres de la partie
-void menu(param* param_partie);
+/// Affichage matrice de jeuBETA
+void affichTabBETA(t_case** tab, param* p);
+
+
+
 
 /// Découverte d'une case : renvoie 0 si la case est deja ouverte, renvoie 1 si il y a une mine, renvoie 2 si tout c'est déroulé normalement
 int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col);
 
-
-
-
-/// Affichage matrice de jeuBETA
+/// Affichage matrice de jeu
 void affichTab(t_case** tab, param* p);
-
-/// Affichage matrice de jeuBETA
-void affichTabBETA(t_case** tab, param* p);
 
 /// GOTOLIGCOL
 void gotoligcol(int x,int y);
 
+/// Gestion de la position du curseur et du clavier
+int actionClavier(t_case** tab, int *i, int *j, int* flagcount, param* param_partie);
+
 /// Clear Buffer pour getchar
 void clearBuffer();
 
+/// (Ré)initialisation de l'affichage de jeu
+void initAffich(t_case** tab, param* param_partie, int flagcount);
 #endif // HEADER_H_INCLUDED

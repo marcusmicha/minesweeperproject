@@ -38,6 +38,9 @@ int main()
     affichTabBETA(tab, param_partie);
     printf("\n");
     decouvreCase(tab, 5, 5, param_partie->nombre_lignes, param_partie->nombre_colonnes);
+
+    ///On clear l'écran à l'aide de la fonction 'system("cls")'
+    system("cls");
     affichTab(tab, param_partie);
 
     /// Libération de la mémoire allouée dynamiquement

@@ -280,6 +280,7 @@ void clearBuffer(){
     }
 }
 
+
 /// Affichage matrice de jeu
 void affichTab(t_case** tab, param* p){
     int i, j;
@@ -321,11 +322,76 @@ void affichTabBETA(t_case** tab, param* p){
 }
 
 /// GOTOLIGCOL
-void gotoligcol(int x,int y)
+void gotoligcol(int lig,int col)
 
 {
+    COORD coord_xy;
+    coord_xy.X = lig;
+    coord_xy.Y = col;
 
-    printf("\033[%d;%dH", (x), (y)) ;
-
+    SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), coord_xy );
 }
 
+int actionClavier(t_case** tab, int *i, int *j, int* flagcount, param* param_partie){
+    char key = 'u';
+    int quitter = 0;
+
+    while(key == 'u')
+    {
+        key = getch();
+
+        switch (key)
+        {
+            case '8' :
+                if(*i>0)
+                {
+                    (*i)--;
+                    gotoligcol(*i, *j);
+                }
+                break;
+            case '2' :
+                if(*i<(param_partie->nombre_lignes - 1))
+                {
+                    (*i)++;
+                    gotoligcol(*i, *j);
+                }
+                break;
+            case '4' :
+                if(*j>0)
+                {
+                    (*j)--;
+                    gotoligcol(*i, *j);
+                }
+                break;
+            case '6' :
+                if(*j<(param_partie->nombre_colonnes - 1))
+                {
+                    (*j)++;
+                    gotoligcol(*i, *j);
+                }
+                break;
+            case ' ' :
+                modifFlag(tab, *i, *j, flagcount);
+                initAffich(tab, param_partie, *flagcount);
+                gotoligcol(*i, *j);
+                break;
+            case '\r' :
+                decouvreCase(tab, *i, *j, param_partie->nombre_lignes, param_partie->nombre_colonnes);
+                initAffich(tab, param_partie, *flagcount);
+                gotoligcol(*i, *j);
+                break;
+            case 'q' :
+                quitter = 1;
+        }
+    }
+    return quitter;
+}
+
+void initAffich(t_case** tab, param* param_partie, int flagcount)
+{
+    system("cls");
+    gotoligcol(0,0);
+    affichTab(tab, param_partie);
+    gotoligcol(param_partie->nombre_colonnes + 8,5);
+    countFlag(param_partie, flagcount);
+}
