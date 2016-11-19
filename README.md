@@ -1,4 +1,4 @@
-## Projet Démineur
+# Projet Démineur
 
 Creation du projet (18/10/2016) : 
   - Création du projet
