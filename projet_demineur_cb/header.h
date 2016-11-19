@@ -30,7 +30,9 @@ typedef struct parametres{
     int nombre_mines;
 }param;
 
-/// Fonctions d'Initialisation
+
+
+/// Fonctions d'Initialisation (init.c)
 /// Initialisation d'une case
 void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouverte);
 
@@ -49,19 +51,7 @@ void initAffich(t_case** tab, param* param_partie, int flagcount);
 
 
 
-/// Fonctions de Test
-/// Affichage des données d'une case
-void affichCase(t_case *pt_case);
-
-/// Affichage des données d'un tableau
-void affichTabData(t_case** tab, int n_ligne, int n_col);
-
-/// Affichage matrice de jeuBETA
-void affichTabBETA(t_case** tab, param* p);
-
-
-
-/// Fonctions de Jeu
+/// Fonctions de Jeu (jeu.c)
 /// Fonction de boucle de jeu
 int boucleJeu(t_case** tab, int* flagcount, param* param_partie);
 
@@ -74,17 +64,31 @@ void gotoligcol(int x,int y);
 /// Découverte d'une case : renvoie 0 si la case est deja ouverte, renvoie 1 si il y a une mine, renvoie 2 si tout c'est déroulé normalement
 int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col, int *nb_a_decouvrir);
 
-/// Affichage matrice de jeu
-void affichTab(t_case** tab, param* p);
-
 /// Gestion des drapeaux
 void countFlag(param* p, int flagcount);
 void modifFlag(t_case** tab, int x, int y, int *flagcount, param* p);
 
+/// Affichage matrice de jeu
+void affichTab(t_case** tab, param* p);
+
+/// Affichage matrice de jeu de fin de partie
+void affichTabFin(t_case** tab, param* p);
 
 
-/// Fonctions supplémentaires
-void clearBuffer();
+
+
+/// Fonctions de Test (test.c)
+/// Affichage des données d'une case
+void affichCase(t_case *pt_case);
+
+/// Affichage des données d'un tableau
+void affichTabData(t_case** tab, int n_ligne, int n_col);
+
+
+
+/// Fonctions supplémentaires (supp.h)
+/// Permet de changer la couleur de la fenetre
+void color(int texte, int fond);
 
 
 

@@ -31,11 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="case.c">
+		<Unit filename="header.h" />
+		<Unit filename="init.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="header.h" />
+		<Unit filename="jeu.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="test.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

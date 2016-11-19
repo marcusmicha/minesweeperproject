@@ -2,13 +2,25 @@
 1479570022 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\case.c
 	"header.h"
 
-1479568761 d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\header.h
+1479574779 d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\header.h
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 	<conio.h>
 	"time.h"
 
-1479570022 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\main.c
+1479574554 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\main.c
+	"header.h"
+
+1479571035 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\test.c
+	"header.h"
+
+1479576058 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\init.c
+	"header.h"
+
+1479573943 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\jeu.c
+	"header.h"
+
+1479574776 source:d:\bibliothèque\travail\ece\algorithmique et programmation structurée en c\projet_demineur_git\minesweeperproject\projet_demineur_cb\supp.c
 	"header.h"
 

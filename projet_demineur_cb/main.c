@@ -11,6 +11,8 @@ int main()
     //int quitter=0;
     param* param_partie = (param*) malloc(sizeof(param));
 
+    color(0,15);
+
     /// Initialisation
 
     srand(time(NULL)); // Réinitialisation pour la fonction rand
