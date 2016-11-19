@@ -179,6 +179,7 @@ void menu(param* param_partie){
     printf("##########################################\n");
     printf("#              Bienvenue !!              #\n");
     printf("#                                        #\n");
+    printf("# 0. Regles du jeu                       #\n");
     printf("# 1. Partie facile (10x10 | 15 mines)    #\n");
     printf("# 2. Partie normale (15x15 | 45 mines)   #\n");
     printf("# 3. Partie difficile (20x20 | 80 mines) #\n");
@@ -190,15 +191,25 @@ void menu(param* param_partie){
 
     do {
         //do {
-            printf("\nVotre choix : ");
-            choix= getchar();
-            clearBuffer();
-            printf("%c\n", choix);
+        printf("\nVotre choix : ");
+        choix= getchar();
+        clearBuffer();
+        //printf("%c\n", choix);
             //scanf("%d", &choix);
         //} while((choix<=0) || (choix>=6));
 
         switch (choix)
         {
+            /// Cas '0' : on affiche les regles du jeu
+            case '0' :
+                gotoligcol(0,12);
+                printf("Le but du jeu est de trouver ou se trouvent toutes les mines dans le quadrillage. Pour cela, il faut ouvrir les cases une par une. Lorsqu'une case est ouverte, alors ");
+                printf("la case affiche le nombre de mines presentes dans les cases adjacentes.   Si il n'y a aucune mine autour, toutes les cases autour sont alors ouvertes.    Le joueur a la possibilite ");
+                printf("de poser un drapeau sur la case pour signaler une    bombe. La partie est gagnée lorsque toutes les cases ne possédant pas de bombes sont ouvertes.\n");
+                printf("Aller vers le haut : touche 8\nAller vers le bas : touche 2\nAller vers la gauche : touche 4\nAller vers la droite : touche 6\nOuvrir une case : touche Entrer\n");
+                printf("Poser un drapeau : touche Espace\nQuitter la partie en cours : touche q\n");
+                break;
+
             /// Cas '1' : partie facile : 10x10 et 15 mines
             case '1' :
                 param_partie->nombre_colonnes=10;
@@ -272,15 +283,6 @@ void menu(param* param_partie){
 
 }
 
-/// Clear Buffer pour getchar
-void clearBuffer(){
-    int c = 0;
-    while (c != '\n' && c != EOF)
-    {
-        c = getchar();
-    }
-}
-
 
 /// Affichage matrice de jeu
 void affichTab(t_case** tab, param* p){
@@ -313,10 +315,8 @@ void affichTabBETA(t_case** tab, param* p){
         for(j = 0; j< p->nombre_colonnes; j++){
                 if (tab[i][j].mine == 9)
                     printf("M");
-                if (tab[i][j].mine >= 1 && tab[i][j].mine <=8)
-                    printf("%d", tab[i][j].mine);
-                if (tab[i][j].mine == 0)
-                    printf(" ");
+               else
+                    printf("/");
             }
         printf("\n");
     }
@@ -350,7 +350,7 @@ int actionClavier(t_case** tab, int *i, int *j, int* flagcount, param* param_par
                     gotoligcol(*j, *i);
                 }
                 break;
-            case '5' :
+            case '2' :
                 if(*i<(param_partie->nombre_lignes - 1))
                 {
                     (*i)++;
@@ -421,9 +421,10 @@ void initAffich(t_case** tab, param* param_partie, int flagcount)
 }
 
 
-void boucleJeu(t_case** tab, int* flagcount, param* param_partie)
+int boucleJeu(t_case** tab, int* flagcount, param* param_partie)
 {
     int quitter = 0, perdu = 0, gagne = 0;
+    char key = 'x';
     int calc = ((param_partie->nombre_colonnes)*(param_partie->nombre_lignes)) - param_partie->nombre_mines;
     int x = (int) param_partie->nombre_lignes / 2;
     int y = (int) param_partie->nombre_colonnes / 2;
@@ -446,11 +447,36 @@ void boucleJeu(t_case** tab, int* flagcount, param* param_partie)
     }
 
     gotoligcol(0, param_partie->nombre_lignes + 2);
-    if(quitter == 1)
+    if(quitter == 1){
+        gotoligcol(param_partie->nombre_colonnes + 8,5);
         printf("A bientot !\n");
-    else if (perdu == 1)
-        printf("Perdu !! ");
-    else if (gagne == 1)
-        printf("Bien Joue !!");
+        return 1;
+    }
+    else if (perdu == 1){
+        system("cls");
+        gotoligcol(0,0);
+        affichTabBETA(tab, param_partie);
+        gotoligcol(param_partie->nombre_colonnes + 8,5);
+        printf("Perdu !! \n");
+    }
+    else if (gagne == 1){
+        gotoligcol(param_partie->nombre_colonnes + 8,5);
+        printf("Bien Joue !!\n");
+    }
 
+    gotoligcol(0, param_partie->nombre_lignes + 2);
+    printf("Appuyez sur Entrer pour revenir au menu");
+
+    while(key!='\r') key = getch();
+
+    return quitter;
+}
+
+/// Clear Buffer pour getchar
+void clearBuffer(){
+    int c = 0;
+    while (c != '\n' && c != EOF)
+    {
+        c = getchar();
+    }
 }

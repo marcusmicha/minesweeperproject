@@ -63,7 +63,7 @@ void affichTabBETA(t_case** tab, param* p);
 
 /// Fonctions de Jeu
 /// Fonction de boucle de jeu
-void boucleJeu(t_case** tab, int* flagcount, param* param_partie);
+int boucleJeu(t_case** tab, int* flagcount, param* param_partie);
 
 /// Gestion de la position du curseur et du clavier
 int actionClavier(t_case** tab, int *i, int *j, int* flagcount, param* param_partie, int* nb_a_decouvrir, int* perdu);
@@ -77,21 +77,13 @@ int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col, int *nb_a_d
 /// Affichage matrice de jeu
 void affichTab(t_case** tab, param* p);
 
-
-
-
-
-
-
-
-
 /// Gestion des drapeaux
 void countFlag(param* p, int flagcount);
 void modifFlag(t_case** tab, int x, int y, int *flagcount, param* p);
 
 
+
 /// Fonctions supplémentaires
-/// Clear Buffer pour getchar
 void clearBuffer();
 
 
