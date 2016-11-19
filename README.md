@@ -16,5 +16,14 @@ Modifications au jour du 18/11/2016 :
 Modifications au jour du 19/11/2016, 15:15 :
   - 1ère version finale du jeu : le cahier des charges est respecté, reste à rendre les fichiers au propre (fonctions tests,
     commentaires supplémentaires, ...)
-  - 
-    
+
+Modifications au jour du 19/11/2016, 18:25 :
+  - 3ème version finale du jeu : cahier des charges respecté, plus ergonomique que les versions précédentes, avec bonus : choix de la
+    couleur, affichage des regles du jeu.
+  - Reste à faire : 
+      - Bien commenter le projet sur les fonctions non commentées
+      - Mettre en constante les magicnumbers
+      - Blinder les valeurs en int (menu couleur, menu partie personnalisée)
+      - Faire le graphe d'appel
+      - Essayer de trouver une nouvelle option pour bonus
+      - faire les headers pour chaque .c
