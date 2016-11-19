@@ -1,12 +1,4 @@
 #include "header.h"
-/// Clear Buffer
-void clearBuffer(){
-    int c = 0;
-    while (c != '\n' && c != EOF)
-    {
-        c = getchar();
-    }
-}
 
 /// Initialisation d'une case
 void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouverte){
@@ -17,7 +9,7 @@ void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouv
     pt_case->ouverte = ouverte;
 }
 
-/// Allocation dynamique de la mmoire pour le tableau
+/// Allocation dynamique de la mémoire pour le tableau
 t_case** creerTab(int n_ligne, int n_col){
     int i=0;
     t_case** tab;
@@ -29,21 +21,38 @@ t_case** creerTab(int n_ligne, int n_col){
 }
 
 /// Initialisation du tableau
-void initTab(t_case** tab, int n_ligne, int n_col){
+void initTab(t_case** tab, int n_ligne, int n_col, int mines){
+    srand(time(NULL)); // Réinitialisation pour le random
+
     int i,j;
     t_case* pt_case = NULL;
 
+    /// On initialise tout le tableau : chaque case n'a pas de mine ni de flag et n'est pas découverte
     for(i=0; i<n_ligne; i++)
     {
         for(j=0; j<n_col; j++)
         {
             pt_case = &(tab[i][j]);
-            initCase(pt_case, i, j, 0,1,0);
+            initCase(pt_case, i, j, 0, 0, 0);
+        }
+    }
+
+    /// On attribue les mines aléatoirement dans la matrice
+    while (mines > 0)
+    {
+        i = rand()%n_ligne;
+        j = rand()%n_col;
+
+        pt_case = &(tab[i][j]);
+        if(pt_case->mine!=9)
+        {
+            pt_case->mine = 9;
+            mines--;
         }
     }
 }
 
-/// Affichage des donnes d'une case
+/// Affichage des données d'une case
 void affichCase(t_case* pt_case){
     printf("x = %d\n",pt_case->pos_x);
     printf("y = %d\n",pt_case->pos_y);
@@ -53,7 +62,7 @@ void affichCase(t_case* pt_case){
     else printf("Mine sur la case !\n"); // si nombre = 9 : mine sur la case
 }
 
-/// Affichage des donnes du tableau
+/// Affichage des données du tableau
 void affichTabData(t_case** tab, int n_ligne, int n_col){
     int i,j;
     printf("\n\nLe tableaux est :\n");
@@ -65,8 +74,94 @@ void affichTabData(t_case** tab, int n_ligne, int n_col){
     }
 }
 
-/// Initialisation des paramtres du menu
-param* menu(param* param_partie){
+int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col) {
+    int n_mines_autour = 0;
+
+    /// Si la case est deja ouverte on ne fait rien
+    if (tab[i][j].ouverte==1)
+        return 0;
+
+    else
+    {
+        /// Si la case possède une mine, on renvoie 1 pour dire que la partie est perdue !
+        if (tab[i][j].mine==9)
+            return 1;
+
+        /// Pour regarder si la case possède des mines autour d'elle, alors
+        else
+        {
+            if (i!=0) // Si on est sur la ligne tout en haut, on ne prend pas en compte les cases d'au dessus, donc si i!=0, on les prend en compte
+            {
+                /// Si on est pas sur la ligne du haut
+                if (tab[i-1][j].mine==9) n_mines_autour++; // si il y a une mine dans la case au dessus, on incrémente n_mines_autour
+
+                /// Si on est pas dans le coin en haut a gauche
+                if (j!=0)
+                {
+                    if (tab[i-1][j-1].mine==9) n_mines_autour++;
+                }
+                /// Si on est pas dans le coin en haut a droite
+                if  (j!=(n_col-1))
+                {
+                    if (tab[i-1][j+1].mine==9) n_mines_autour++;
+                }
+            }
+
+            if (i!=(n_ligne-1))
+            {
+                /// Si on est pas sur la ligne du bas
+                if (tab[i+1][j].mine==9) n_mines_autour++;
+
+                /// Si on est pas dans le coin en bas a gauche
+                if (j!=0)
+                {
+                    if (tab[i+1][j-1].mine==9) n_mines_autour++;
+                }
+                /// Si on est pas dans le coin en bas a droite
+                if  (j!=(n_col-1))
+                {
+                    if (tab[i+1][j+1].mine==9) n_mines_autour++;
+                }
+            }
+
+            /// Si on est pas sur la colonne de gauche
+            if (j!=0)
+            {
+                if (tab[i][j-1].mine==9) n_mines_autour++;
+            }
+
+            /// Si on est pas sur la colonne de droite
+            if (j!=(n_col-1))
+            {
+                if (tab[i][j+1].mine==9) n_mines_autour++;
+            }
+        }
+
+        /// La case est ouverte et possède n nombre de mines autour
+        tab[i][j].mine = n_mines_autour;
+        tab[i][j].ouverte = 1;
+
+        /// Si la case ne possède aucune mine autour d'elle, alors on ouvre les 8 cases autour d'elle
+        if (n_mines_autour==0);
+        {
+            decouvreCase(tab,i-1,j-1,n_ligne,n_col);
+            decouvreCase(tab,i-1,j,n_ligne,n_col);
+            decouvreCase(tab,i-1,j+1,n_ligne,n_col);
+            decouvreCase(tab,i,j+1,n_ligne,n_col);
+            decouvreCase(tab,i+1,j+1,n_ligne,n_col);
+            decouvreCase(tab,i+1,j,n_ligne,n_col);
+            decouvreCase(tab,i+1,j-1,n_ligne,n_col);
+            decouvreCase(tab,i,j-1,n_ligne,n_col);
+        }
+
+    }
+
+    return 2;
+}
+
+
+
+void menu(param* param_partie){
 
     /// On initialise les variables nécessaires
     int ok=0, mines_min, mines_max;
@@ -88,16 +183,20 @@ param* menu(param* param_partie){
     printf("# 5. Quitter                             #\n");
     printf("#                                        #\n");
     printf("##########################################\n");
-    printf("\nVotre choix : ");
+
 
     do {
-        
-        choix = getchar();
-        clearBuffer();
+        //do {
+            printf("\nVotre choix : ");
+            choix= getchar();
+            clearBuffer();
+            printf("%c\n", choix);
+            //scanf("%d", &choix);
+        //} while((choix<=0) || (choix>=6));
 
         switch (choix)
         {
-            /// Cas 1 : partie facile : 10x10 et 15 mines
+            /// Cas '1' : partie facile : 10x10 et 15 mines
             case '1' :
                 param_partie->nombre_colonnes=10;
                 param_partie->nombre_lignes=10;
@@ -105,7 +204,7 @@ param* menu(param* param_partie){
                 ok=1;
                 break;
 
-            /// Cas 2 : partie moyenne : 15x15 et 45 mines
+            /// Cas '2' : partie moyenne : 15x15 et 45 mines
             case '2' :
                 param_partie->nombre_colonnes=15;
                 param_partie->nombre_lignes=15;
@@ -113,7 +212,7 @@ param* menu(param* param_partie){
                 ok=1;
                 break;
 
-            /// Cas 3 : partie difficile : 20x20 et 80 mines
+            /// Cas '3' : partie difficile : 20x20 et 80 mines
             case '3' :
                 param_partie->nombre_colonnes=15;
                 param_partie->nombre_lignes=15;
@@ -121,7 +220,7 @@ param* menu(param* param_partie){
                 ok=1;
                 break;
 
-            /// Cas 4 : partie personnalisée
+            /// Cas '4' : partie personnalisée
             case '4' :
 
                 /// L'utilisateur rentre le nombre de colonnes souhaitées
@@ -157,9 +256,9 @@ param* menu(param* param_partie){
                 ok=1;
                 break;
 
-            /// Cas 5 : on quitte la partie
-            case 5 :
-                return NULL; // on renvoie le pointeur NULL. On prendra en compte le ponteur null pour quitter le programme dans le main.
+            /// Cas '5' : on quitte la partie
+            case '5' :
+                exit(0);// on renvoie le pointeur NULL. On prendra en compte le ponteur null pour quitter le programme dans le main.
 
             /// Autres cas : la valeur rentrée n'est pas valide
             default :
@@ -168,9 +267,15 @@ param* menu(param* param_partie){
         }
     } while (ok == 0);
 
-    /// on renvoie le pointeur sur la structure comprenant les paramètres de la partie
-    return param_partie;
+}
 
+/// Clear Buffer pour getchar
+void clearBuffer(){
+    int c = 0;
+    while (c != '\n' && c != EOF)
+    {
+        c = getchar();
+    }
 }
 
 /// Affichage matrice de jeu
@@ -194,7 +299,7 @@ void affichTab(t_case** tab, param* p){
             }
         printf("\n");
     }
-        
+
 }
 
 /// Affichage matrice de jeuBETA
@@ -216,17 +321,8 @@ void affichTabBETA(t_case** tab, param* p){
 void gotoligcol(int x,int y)
 
 {
-    
+
     printf("\033[%d;%dH", (x), (y)) ;
-    
+
 }
-
-
-
-
-
-
-
-
-
 

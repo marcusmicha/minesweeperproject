@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <curses.h>
 #include "time.h"
 
 #define COL_MIN 5
@@ -29,9 +28,6 @@ typedef struct parametres{
     int nombre_mines;
 }param;
 
-/// ClearBuffer
-void clearBuffer();
-
 /// Initialisation d'une case
 void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouverte);
 
@@ -39,7 +35,7 @@ void initCase(t_case *pt_case, int pos_x, int pos_y, int flag, int mine, int ouv
 t_case** creerTab(int n_ligne, int n_col);
 
 /// Initialisation d'un tableau
-void initTab(t_case** tab, int n_ligne, int n_col);
+void initTab(t_case** tab, int n_ligne, int n_col, int mines);
 
 /// Affichage des donnÈes d'une case
 void affichCase(t_case *pt_case);
@@ -47,8 +43,14 @@ void affichCase(t_case *pt_case);
 /// Affichage des donnÈes d'un tableau
 void affichTabData(t_case** tab, int n_ligne, int n_col);
 
-/// Initialisation des paramètres du menu
-param* menu(param* param_partie);
+/// Affichage du menu et retour des paramËtres de la partie
+void menu(param* param_partie);
+
+/// DÈcouverte d'une case : renvoie 0 si la case est deja ouverte, renvoie 1 si il y a une mine, renvoie 2 si tout c'est dÈroulÈ normalement
+int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col);
+
+
+
 
 /// Affichage matrice de jeuBETA
 void affichTab(t_case** tab, param* p);
@@ -56,7 +58,10 @@ void affichTab(t_case** tab, param* p);
 /// Affichage matrice de jeuBETA
 void affichTabBETA(t_case** tab, param* p);
 
-///GOTOLIGCOL
+/// GOTOLIGCOL
 void gotoligcol(int x,int y);
+
+/// Clear Buffer pour getchar
+void clearBuffer();
 
 #endif // HEADER_H_INCLUDED
