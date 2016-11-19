@@ -36,6 +36,9 @@ int main()
     initTab(tab, n_ligne, n_col, n_mines);
     //affichTabData(tab, n_ligne, n_col);
     affichTabBETA(tab, param_partie);
+    printf("\n");
+    decouvreCase(tab, 5, 5, param_partie->nombre_lignes, param_partie->nombre_colonnes);
+    affichTab(tab, param_partie);
 
     /// Libération de la mémoire allouée dynamiquement
 

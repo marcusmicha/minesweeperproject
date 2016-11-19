@@ -146,7 +146,7 @@ int decouvreCase(t_case** tab, int i, int j, int n_ligne, int n_col) {
         tab[i][j].ouverte = 1;
 
         /// Si la case ne possède aucune mine autour d'elle, alors on ouvre les 8 cases autour d'elle
-        if (n_mines_autour==0);
+        if (tab[i][j].mine==0)
         {
             decouvreCase(tab,i-1,j-1,n_ligne,n_col);
             decouvreCase(tab,i-1,j,n_ligne,n_col);
@@ -308,7 +308,7 @@ void affichTab(t_case** tab, param* p){
 void affichTabBETA(t_case** tab, param* p){
     int i, j;
     for(i = 0; i< p->nombre_lignes; i++){
-        for(j = 0; j< p->nombre_colonnes; j++)
+        for(j = 0; j< p->nombre_colonnes; j++){
                 if (tab[i][j].mine == 9)
                     printf("M");
                 if (tab[i][j].mine >= 1 && tab[i][j].mine <=8)
@@ -318,6 +318,7 @@ void affichTabBETA(t_case** tab, param* p){
             }
         printf("\n");
     }
+}
 
 /// GOTOLIGCOL
 void gotoligcol(int x,int y)
