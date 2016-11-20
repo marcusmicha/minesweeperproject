@@ -27,3 +27,15 @@ Modifications au jour du 19/11/2016, 18:25 :
       - Faire le graphe d'appel
       - Essayer de trouver une nouvelle option pour bonus
       - faire les headers pour chaque .c
+
+
+Modificatoins au jour du 20/11/2016, 14:24 :
+  - Version finale améliorée :
+    - La plupart des fonctions sont bien commentées
+    - Les magic numbers sont corrigés
+    - L'architecture en .h a été modifiée mais ne correspond toujours pas a la demande faite par CodeAnalysis
+    - Ajout de couleur pour les caractères de la grille en fonction du caractère affiché
+  - Reste à faire :
+    - Blinder les valeurs en int (menu couleur, menu partie personnalisée)
+    - Faire les derniers commentaires
+    - Le rapport :D
